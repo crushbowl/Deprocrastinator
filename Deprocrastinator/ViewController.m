@@ -19,15 +19,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tasks = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
     
-    cell.textLabel.text = [self.tasks objectAtIndex:1];
+   // cell.textLabel.text = [self.tasks objectAtIndex:0];
     
-    NSLog(@"%@", [self.tasks objectAtIndex:indexPath.row]) ;
+  
     return cell;
 }
 
@@ -35,8 +36,8 @@
     NSString *addedTask = self.taskTextField.text;
     [self.tasks addObject:addedTask];
     [self.toDoListTableView reloadData];
-    //[self.tasks addObject:self.taskTextField.text];
-    
+    [self.tasks addObject:self.taskTextField.text];
+    NSLog(@"%@", self.tasks);
 //    self.tasks = [NSMutableArray]
     
 }
