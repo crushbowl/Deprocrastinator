@@ -19,14 +19,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tasks = [[NSMutableArray alloc] init];
+//    self.tasks = [[NSMutableArray alloc] init];
+    self.tasks = [NSArray arrayWithObjects:@"get up", @"make coffee", nil].mutableCopy;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
     
-   // cell.textLabel.text = [self.tasks objectAtIndex:0];
+    cell.textLabel.text = [self.tasks objectAtIndex:indexPath.row];
     
   
     return cell;
@@ -44,7 +45,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return self.tasks.count;
 }
 
 
