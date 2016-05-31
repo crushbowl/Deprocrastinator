@@ -17,11 +17,11 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
-//    self.tasks = [[NSMutableArray alloc] init];
+    // self.tasks = [[NSMutableArray alloc] init];
     self.tasks = [NSArray arrayWithObjects:@"get up", @"make coffee", nil].mutableCopy;
-    // Do any additional setup after loading the view, typically from a nib.
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -33,15 +33,31 @@
     return cell;
 }
 
-- (IBAction)onAddButtonPressed:(UIButton *)sender {
+- (IBAction)onButtonPressed:(UIBarButtonItem *)sender {
     NSString *addedTask = self.taskTextField.text;
     [self.tasks addObject:addedTask];
     [self.toDoListTableView reloadData];
     [self.tasks addObject:self.taskTextField.text];
     NSLog(@"%@", self.tasks);
-//    self.tasks = [NSMutableArray]
+    //    self.tasks = [NSMutableArray]
+    [self.taskTextField resignFirstResponder];
+    self.taskTextField.text = nil;
     
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSString *addedTask = self.taskTextField.text;
+    [self.tasks addObject:addedTask];
+    [self.toDoListTableView reloadData];
+    [self.tasks addObject:self.taskTextField.text];
+ 
+    //    self.tasks = [NSMutableArray]
+    [self.taskTextField resignFirstResponder];
+    self.taskTextField.text = nil;
+    return YES;
+}
+
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
