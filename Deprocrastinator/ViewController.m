@@ -23,6 +23,35 @@
     self.tasks = [NSArray arrayWithObjects:@"get up", @"make coffee", nil].mutableCopy;
 
 }
+- (IBAction)onEditButtonPresssed:(UIBarButtonItem *)sender {
+    /*[sender setTitle:@"EDIT" forState:UIControlStateNormal];*/
+    sender.title =@"DONE";
+    if (sender.title isEqualToString:"DONE") {
+        
+    }
+
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+    
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.tasks removeObjectAtIndex:indexPath.row];
+        [self.toDoListTableView reloadData];
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Detemine if it's in editing mode
+    if (self.toDoListTableView.editing)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    
+    return UITableViewCellEditingStyleNone;
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
@@ -34,26 +63,21 @@
 }
 
 - (IBAction)onButtonPressed:(UIBarButtonItem *)sender {
-    NSString *addedTask = self.taskTextField.text;
-    [self.tasks addObject:addedTask];
-    //[self.toDoListTableView reloadData];
+
     [self.tasks addObject:self.taskTextField.text];
     [self.toDoListTableView reloadData];
     NSLog(@"%@", self.tasks);
-    //    self.tasks = [NSMutableArray]
+    //self.tasks = [NSMutableArray]
     [self.taskTextField resignFirstResponder];
-//     = [UIColor redColor]];
     self.taskTextField.text = nil;
     
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSString *addedTask = self.taskTextField.text;
-    [self.tasks addObject:addedTask];
+    //NSString *addedTask = self.taskTextField.text;
+    //[self.tasks addObject:addedTask];
     [self.toDoListTableView reloadData];
     [self.tasks addObject:self.taskTextField.text];
- 
-    //    self.tasks = [NSMutableArray]
     [self.taskTextField resignFirstResponder];
     self.taskTextField.text = nil;
     return YES;
