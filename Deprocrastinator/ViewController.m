@@ -36,11 +36,13 @@
 - (IBAction)onButtonPressed:(UIBarButtonItem *)sender {
     NSString *addedTask = self.taskTextField.text;
     [self.tasks addObject:addedTask];
-    [self.toDoListTableView reloadData];
+    //[self.toDoListTableView reloadData];
     [self.tasks addObject:self.taskTextField.text];
+    [self.toDoListTableView reloadData];
     NSLog(@"%@", self.tasks);
     //    self.tasks = [NSMutableArray]
     [self.taskTextField resignFirstResponder];
+//     = [UIColor redColor]];
     self.taskTextField.text = nil;
     
 }
@@ -57,7 +59,10 @@
     return YES;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.textColor = [UIColor greenColor];
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
